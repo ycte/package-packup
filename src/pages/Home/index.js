@@ -1,4 +1,4 @@
-import { Card, Table, Tag, Timeline} from "antd"
+import { Card, Tag, Timeline} from "antd"
 import { Link } from "react-router-dom";
 import { Collapse } from 'antd';
 import './index.scss'
@@ -19,48 +19,6 @@ const theItems = [
 const getItem = (e) => {
   return theItems
 }
-const columns = [
-  // {
-  //   title: '行李编号',
-  //   dataIndex: 'id',
-  //   width: 50
-  // },
-  {
-    title: '序号',
-    dataIndex: 'key',
-    width:50
-  },
-  {
-    title: '行李状态',
-    dataIndex: 'state',
-    width: 50,
-    render: state => {
-      let color = state === '已签收' ? 'green':'geekblue';
-      if (state === '未开始') {
-            color = 'volcano';
-      }
-      return (
-        <Tag color={color} key={state}>
-          <Link to={'home'}>{state}</Link>
-        </Tag>
-      );
-    }
-  },
-  // {
-  //   // Timeline
-  //   title: '状态详情',
-  //   dataIndex: 'states',
-  //   width: 200,
-  //   render: states => {
-  //     return <Link to={states}>点击查看</Link>
-  //   }
-  // },
-  {
-    title: '取件码',
-    dataIndex: 'pick_id',
-    width: 50
-  },
-]
 
 const data = [
   {
@@ -103,19 +61,6 @@ const Home = () => {
     <div>
       <Card className="pkgCard">
         我的行李
-        {/* <Table columns={columns} 
-          // rowSelection={{}}
-          expandable={{
-            expandedRowRender: (record) => (
-              <div>
-                <span>行李编号:{record.id}</span>
-                <Timeline items={getItem(record.id)}/>
-              </div>
-            ),
-            rowExpandable: (record) => record.state !== '未开始',
-          }}
-          dataSource={data} 
-        />  */}
       </Card>
       <div>
         { 

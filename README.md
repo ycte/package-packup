@@ -1,0 +1,6 @@
+# Pages
+* assets: img and so on
+* components: 组件工具
+* pages: pages
+* store: 数据处理
+* utils: 高复用度工具

@@ -1,15 +1,17 @@
-import { Layout, Menu,
+import { Layout,
   FloatButton, 
   // Breadcrumb,
   Dropdown,
   Space,
+  
 } from 'antd'
 import {
   // HomeOutlined,
   // DiffOutlined,
   // EditOutlined,
-  DownOutlined,
+  // DownOutlined,
   MenuOutlined,
+  ArrowRightOutlined,
 //   LogoutOutlined
 } from '@ant-design/icons'
 import './index.scss'
@@ -59,13 +61,13 @@ const clickFloatBton = () => {
 }
 
 const BaseLayout = () => {
-  const [current, setCurrent] = useState('totalMenu');
+  const [current, setCurrent] = useState('layout-dropdown');
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
   };
   return (
-    <Layout>
+    <Layout className='layout-total'>
       <Header className="header">
 
         <div>
@@ -77,14 +79,16 @@ const BaseLayout = () => {
           <Dropdown
             menu={{
               items,
+              selectable: true,
+              defaultSelectedKeys: [current],
             }}
             className='layout-dropdown'
           >
-            <a onClick={onClick}>
+            <Link type="link" onClick={onClick}>
               <Space>
                 <MenuOutlined />
               </Space>
-            </a>
+            </Link>
           </Dropdown>
           {/* <Menu mode="horizontal" items={items} selectedKeys={[current]} onClick={onClick}
             className='menu'/> */}
@@ -102,12 +106,13 @@ const BaseLayout = () => {
           <span className="user-name">user.name</span>
           <span className="user-logout">
             <Popconfirm title="是否确认退出？" okText="退出" cancelText="取消">
-              <LogoutOutlined /> 退出
+              退出
             </Popconfirm>
           </span>
         </div> */}
         <div>
-          <FloatButton onClick={clickFloatBton} />
+          <FloatButton onClick={clickFloatBton} type="primary" 
+           icon={<ArrowRightOutlined />}/>
         </div>
       </body>
       

@@ -1,4 +1,4 @@
-import { Descriptions} from "antd"
+import { Button, Descriptions} from "antd"
 function GetNo(){
   return <span>22920202207777</span>
 }
@@ -46,6 +46,7 @@ const Info = () => {
           {<GetAddress/>}
         </Descriptions.Item>
       </Descriptions>
+      <Button>退出登录</Button>
       </div>
     )
   }

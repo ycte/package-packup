@@ -1,3 +1,6 @@
+.layout-total {
+    background-color: rgba(0, 0, 0, 0);
+}
 .header {
     text-align: center;
     background-color: white;
@@ -38,12 +41,17 @@
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: inline-flex;
+        margin:auto;
+        float:right;
+        margin-right: 7%;
     }
 }
 
 .body {
-    background-color: gainsboro;
+    background-color: rgba(0, 0, 0, 0);
+    // height:2000px;
     .layout-content {
-        padding: 7%;
+        padding: 6%;
+        background-color: rgba(0, 0, 0, 0);
     }
 }

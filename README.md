@@ -1,3 +1,4 @@
+# 😑快把它忘了
 # Pages
 * assets: img and so on
 * components: 组件工具

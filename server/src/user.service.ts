@@ -9,9 +9,10 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  getHello(): string {
-    // console.log(this.userRepository.find().resolve());
-    return 'Hello World!' + this.userRepository.find();
+  async getHello(): Promise<User[]> {
+    const value = await this.userRepository.find();
+    // console.log(value);
+    return value;
   }
   getIndex(): string {
     return `not allowed to login`;

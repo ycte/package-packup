@@ -1,5 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { UserService } from './user.service';
+import { User } from './user.entity';
 
 @Controller('/api/users')
 export class UserController {
@@ -10,7 +11,7 @@ export class UserController {
     return this.userService.getIndex();
   }
   @Post()
-  getHello(): string {
+  async getHello(): Promise<User[]> {
     return this.userService.getHello();
   }
 }

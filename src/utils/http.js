@@ -1,14 +1,15 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'localhost:3000',
+  baseURL: 'http://127.0.0.1:3000',
   timeout: 5000
 })
 
 // 添加请求拦截器
 http.interceptors.request.use((config)=> {
   return config
-}, (error)=> {
+}, (error) => {
+  console.log("http request err:", error)
   return Promise.reject(error)
 })
 
@@ -20,6 +21,7 @@ http.interceptors.response.use((response)=> {
 }, (error)=> {
   // 超出 2xx 范围的状态码都会触发该函数。
   // 对响应错误做点什么
+  console.log("http response err:", error)
   return Promise.reject(error)
 })
 

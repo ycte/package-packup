@@ -11,7 +11,8 @@ export default function HomeLayout() {
     //   <Drawer />
     // </>
     <ThemeProvider value={DefaultTheme}>
-      <Drawer />
+      <Drawer>
+      </Drawer>
     </ThemeProvider>
   )
 }

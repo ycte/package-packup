@@ -1,4 +1,5 @@
 // TODO: RN StyleSheet && good UI eg.(antd mobile, nextui)
+// TODO: login authRoute expo Imperative navigation 命令式导航
 // 2023/9/26: 加入响应式布局和设备检测
 import '@expo/match-media'
 import React from "react";

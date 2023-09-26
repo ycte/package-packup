@@ -15,8 +15,8 @@ const Login = () => {
     console.log("Finish:", values);
     try {
       await loginStore.login ({
-          mobile: values.username,
-          code: values.password
+          username: values.username,
+          password: values.password
       })
       navigate('/')
     } catch (e) {

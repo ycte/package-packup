@@ -1,63 +1,96 @@
 import { Card, Tag, Timeline} from "antd"
 import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import { Collapse, Input } from 'antd';
+import { getToken, http } from "@/utils";
 import './index.scss';
 // import { QrcodeOutlined } from '@ant-design/icons';
 const { Panel } = Collapse;
 
-const theItems = [
-  {
-    color: 'gray',
-    children: '3-27 17:56 从厦门北站装车'
-  },
-  {
-    color: 'green',
-    // dot: <SmileOutlined />,
-    children: '已到达一期凉亭'
-  }
-]
-const getItem = (id) => {
-  return theItems
-}
-const data = [
-  {
-    key: 1,
-    id: '229202276301',
-    states: '已签收',
-    state: '已签收',
-    pick_id: '10-2777-1',
-  },
-  {
-    key:2,
-    id: '229202276302',
-    states: '已签收',
-    state: '运输中',
-    pick_id: '10-2777-2',
-  },
-  {
-    key:3,
-    id: '229202276302',
-    states: '已签收',
-    state: '未开始',
-    pick_id: '10-2777-3',
-  }
-]
 
-const GetState = (props) => {
-  let color = props.state === '已签收' ? 'green':'geekblue';
-      if (props.state === '未开始') {
-            color = 'volcano';
-      }
-      return (
-        <Tag color={color}>
-          <Link to={'home'}>{props.state}</Link>
-        </Tag>
-      );
-}
 
 const Home = () => {
-  return (
-    
+  const theItems = [
+    {
+      color: 'gray',
+      children: '3-27 17:56 从厦门北站装车'
+    },
+    {
+      color: 'green',
+      // dot: <SmileOutlined />,
+      children: '已到达一期凉亭'
+    }
+  ]
+  const getItem = (id) => {
+    return theItems
+  }
+  
+  const [data, setdata] = useState
+    ([
+    {
+      pkgId: 1,
+      userId: '229202276301',
+      state: '已签收',
+      content: '10-2777-1',
+    },
+    {
+      pkgId:2,
+      userId: '229202276302',
+      state: '运输中',
+      content: '10-2777-2',
+    },
+    {
+      pkgId:3,
+      userId: '229202276302',
+      state: '未开始',
+      content: '10-2777-3',
+    }
+  ])
+  const fetchMyPkgs = async () => {
+    const token = getToken()
+    // console.log(token)
+    if (!token) {
+      console.log('no token')
+    }
+    try {
+      // console.log(token)
+      http.interceptors.request.use(config => {
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      })
+      // TODO: useState 触发重新 render，
+      // 重新 get my-pkg，导致无限循环
+      let res = (await http.get('/pkg/getmy')).data     
+      console.log('my-pkg:', res)
+      return (res);
+    } catch (e) {
+      console.log('get my-pkg info err:', e)
+    }
+  }
+
+  // TODO: 是否缓存,
+  // ref 响应式失败, 仅在后面的 [] 改变时才调用
+  useEffect(() => {
+    fetchMyPkgs().then(res => {
+      setdata(res)
+    })
+  }, [])
+
+  // console.log('data:', data)
+  const GetState = (props) => {
+    let color = props.state === '已签收' ? 'green':'geekblue';
+        if (props.state === '未开始') {
+              color = 'volcano';
+        }
+        return (
+          <Tag color={color}>
+            <Link to={'home'}>{props.state}</Link>
+          </Tag>
+        );
+  }
+
+  // fetchMyPkgs()
+  return ( 
     <div>
       <div className="QRIcon">
         {/* <QrcodeOutlined className="antd_qrcode"/> */}
@@ -77,6 +110,7 @@ const Home = () => {
           data.map((value,key) => {
             // console.log("pktInfo Card");
             // console.log(value);
+            // console.log(key);
             return (
               <Card className="pktInfo" key={key}>
                 <GetState state={value.state}/>
@@ -84,7 +118,7 @@ const Home = () => {
                   key={key} style=
                   {{ fontSize: "x-large", fontWeight: 777 }}
                 >
-                  {value.pick_id}
+                  {value.content}
                 </li> 
                 <Collapse defaultActiveKey={['1']} ghost>
                   <Panel header="点击查看包裹状态" key={value.id} >

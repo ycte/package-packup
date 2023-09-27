@@ -7,5 +7,8 @@
 * utils: 高复用度工具
 
 # exec
-``` npm install -g nodemon ```
-``` yarn install ```
+```bash
+# or npm or yarn or ?bun 
+pnpm install 
+pnpm start
+```

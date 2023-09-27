@@ -20,7 +20,7 @@ const getInfo = async () => {
     // return <Navigate to="/login" replace />
   }
   try {
-    console.log(token)
+    // console.log(token)
     http.interceptors.request.use(config => {
       config.headers.Authorization = `Bearer ${token}`;
       return config;

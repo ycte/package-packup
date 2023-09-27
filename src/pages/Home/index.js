@@ -1,6 +1,7 @@
 import { Card, Tag, Timeline} from "antd"
 import { Link } from "react-router-dom";
 import { Collapse, Input } from 'antd';
+import { getToken, http } from "@/utils";
 import './index.scss';
 // import { QrcodeOutlined } from '@ant-design/icons';
 const { Panel } = Collapse;
@@ -19,29 +20,48 @@ const theItems = [
 const getItem = (id) => {
   return theItems
 }
-const data = [
+
+// TODO: 是否缓存
+var data = [
   {
-    key: 1,
-    id: '229202276301',
-    states: '已签收',
+    pkgId: 1,
+    userId: '229202276301',
     state: '已签收',
-    pick_id: '10-2777-1',
+    content: '10-2777-1',
   },
   {
-    key:2,
-    id: '229202276302',
-    states: '已签收',
+    pkgId:2,
+    userId: '229202276302',
     state: '运输中',
-    pick_id: '10-2777-2',
+    content: '10-2777-2',
   },
   {
-    key:3,
-    id: '229202276302',
-    states: '已签收',
+    pkgId:3,
+    userId: '229202276302',
     state: '未开始',
-    pick_id: '10-2777-3',
+    content: '10-2777-3',
   }
 ]
+
+const fetchMyPkgs = async () => {
+  const token = getToken()
+  // console.log(token)
+  // TODO: 直接接入路由跳转
+  if (!token) {
+    console.log('no token')
+  }
+  try {
+    // console.log(token)
+    http.interceptors.request.use(config => {
+      config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    })
+    data = (await http.get('/pkg/getmy')).data
+    console.log('my-pkg:',data)
+  } catch (e) {
+    console.log('get my-pkg info err:', e)
+  }
+}
 
 const GetState = (props) => {
   let color = props.state === '已签收' ? 'green':'geekblue';
@@ -56,8 +76,8 @@ const GetState = (props) => {
 }
 
 const Home = () => {
-  return (
-    
+  fetchMyPkgs()
+  return ( 
     <div>
       <div className="QRIcon">
         {/* <QrcodeOutlined className="antd_qrcode"/> */}
@@ -75,8 +95,9 @@ const Home = () => {
       <div>
         { 
           data.map((value,key) => {
-            // console.log("pktInfo Card");
+            console.log("pktInfo Card");
             // console.log(value);
+            // console.log(key);
             return (
               <Card className="pktInfo" key={key}>
                 <GetState state={value.state}/>
@@ -84,7 +105,7 @@ const Home = () => {
                   key={key} style=
                   {{ fontSize: "x-large", fontWeight: 777 }}
                 >
-                  {value.pick_id}
+                  {value.content}
                 </li> 
                 <Collapse defaultActiveKey={['1']} ghost>
                   <Panel header="点击查看包裹状态" key={value.id} >

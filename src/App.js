@@ -1,5 +1,5 @@
 // 导入路由
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css';
 // import { Button } from 'antd';
 import 'antd/dist/reset.css';
@@ -19,26 +19,29 @@ function App() {
     // <div className="App">
     //   APP
     // </div>
-    <BrowserRouter>
-      <div className='App'>
+    <>
+      
+      <BrowserRouter>
+        {/* <div className='App'> */}
         {/* <Button type="primary">Button</Button> */}
         <Routes>
           <Route path='/' element={
             <AuthRoute>
-              <BaseLayout/>
+              <BaseLayout />
             </AuthRoute>
           }>
             {/* 二级路由 */}
-            <Route index element={<Home/>}/>
-            <Route path='/pick-up' element={<PickUp/>}/>
-            <Route path='/state-manage' element={<StateManage/>}/>
-            <Route path='/info' element={<Info/>}/>
+            <Route index element={<Home />} />
+            <Route path='/pick-up' element={<PickUp />} />
+            <Route path='/state-manage' element={<StateManage />} />
+            <Route path='/info' element={<Info />} />
           </Route>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/qrcode' element={<ScanQRCode/>}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/qrcode' element={<ScanQRCode />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+        {/* </div> */}
+      </BrowserRouter>
+    </>
   );
 }
 

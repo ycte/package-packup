@@ -1,50 +1,55 @@
 import { Button, Descriptions } from "antd"
-import { getToken, http } from "@/utils"
+// import { Navigate } from "react-router-dom";
+import { getToken, http, clearToken } from "@/utils"
 
+var infoMap = {
+  address: '厦门市翔安区',
+  college: '计算机学院',
+  isActive: true,
+  name: '李小行',
+  tel: '13800000',
+  userId: '2292020220????',
+  username: 'john',
+};
+const getInfo = async () => {
+  const token = getToken()
+  // console.log(token)
+  // TODO: 直接接入路由跳转
+  if (!token) {
+    console.log('no token')
+    // return <Navigate to="/login" replace />
+  }
+  try {
+    console.log(token)
+    http.interceptors.request.use(config => {
+      config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    })
+    infoMap = (await http.get('/users/me')).data
+    console.log(infoMap)
+  } catch (e) {
+    console.log('get user info err:', e)
+  }
+}
+const GetNo = () =>
+  <span>{infoMap.userId}</span>
+const GetCollege = () =>
+  <span>{infoMap.college}</span>
+const GetName = () =>
+  <span>{infoMap.name}</span>
+const GetTel = () =>
+  <span>{infoMap.address}</span>
+const GetAddress = () =>
+  <span>{infoMap.address}</span>
+
+// TODO: how to expire jwt
+const logout = () => {
+  clearToken()
+  window.location.replace('/login')
+}
 const Info = () => {
-  async function getInfo() {
-    const token = getToken()
-    try {
-      console.log(token)
-      http.interceptors.request.use(config => {
+  getInfo();
 
-        config.headers.Authorization =
-          `Bearer ${token}`;
-        return config;
-      })
-      const data = (await http.get('/users/me'))
-      console.log(data)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  function GetNo() {
-    return <span>22920202207777</span>
-  }
-  function GetCollege() {
-    return <span>信息学院</span>
-  }
-  function GetName() {
-    return <span>哈哈哈</span>
-  }
-  function GetTel() {
-    return <span>(这是一个电话)</span>
-  }
-  function GetAddress() {
-    return (
-      <div>
-        {<GetCollege />}
-        <br />
-        翔安校区学生公寓一期
-        <br />
-        芙蓉学生公寓
-        <br />
-        芙蓉x号楼xxxx
-        <br />
-        <span>{<GetName />},{<GetTel />}</span>
-      </div>
-    )
-  }
   return (
     <div>
       <Descriptions
@@ -64,7 +69,7 @@ const Info = () => {
         </Descriptions.Item>
       </Descriptions>
       <Button onClick={getInfo}>获取信息</Button>
-      <Button>退出登录</Button>
+      <Button onClick={logout}>退出登录</Button>
     </div>
   )
 }

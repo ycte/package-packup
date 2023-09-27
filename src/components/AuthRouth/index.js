@@ -4,32 +4,32 @@
 
 // 高阶组件:把一个组件当成另外一个组件的参数传入 然后通过一定的判断 返回新的组件
 import { getToken } from "@/utils"
-// import { Navigate } from 'react-router-dom'
-import { Modal } from "antd"
-import { useState } from "react";
+import { Navigate } from 'react-router-dom'
+// import { Modal } from "antd"
+// import { useState } from "react";
 
 function AuthRoute ({ children }) {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState(true);
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+  // const handleCancel = () => {
+  //   setIsModalOpen(false);
+  // };
   
   const isToken = getToken()
   if (isToken) {
     return <>{children}</>
   } else {
-    return (
-      <>
-        {children}
-        <Modal title="未登录……" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <p>账号后台 API 制作中...</p>
-        </Modal>
-      </>
-    )
-    // return <Navigate to="/login" replace />
+    // return (
+    //   <>
+    //     {children}
+    //     <Modal title="未登录……" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+    //       <p>账号后台 API 制作中...</p>
+    //     </Modal>
+    //   </>
+    // )
+    return <Navigate to="/login" replace />
   }
 }
 

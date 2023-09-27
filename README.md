@@ -12,3 +12,18 @@
 pnpm install 
 pnpm start
 ```
+
+1. useState 无限循环
+
+```js
+export const stateeg = () => {
+  const [state, setState] = useState(0)
+  const onCreate = () => {
+    setState(state + 1)
+    console.log(state)
+  }
+  return (
+    <div>{state}</div>
+  )
+}
+```

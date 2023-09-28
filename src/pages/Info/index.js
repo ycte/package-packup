@@ -1,3 +1,4 @@
+// TODO: 修改地址信息
 import { Button, Descriptions } from "antd"
 // import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react"
@@ -17,10 +18,8 @@ const Info = () => {
   const getInfo = async () => {
     const token = getToken()
     // console.log(token)
-    // TODO: 直接接入路由跳转
     if (!token) {
       console.log('no token')
-      // return <Navigate to="/login" replace />
     }
     try {
       // console.log(token)

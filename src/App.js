@@ -1,10 +1,7 @@
-// 导入路由
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css';
-// import { Button } from 'antd';
 import 'antd/dist/reset.css';
 
-// 导入页面组件
 import Login from './pages/Login'
 import BaseLayout from '@/pages/Layout';
 import { AuthRoute } from './components/AuthRouth';
@@ -17,14 +14,8 @@ import StateView from './pages/State';
 
 function App() {
   return (
-    // <div className="App">
-    //   APP
-    // </div>
     <>
-      
       <BrowserRouter>
-        {/* <div className='App'> */}
-        {/* <Button type="primary">Button</Button> */}
         <Routes>
           <Route path='/' element={
             <AuthRoute>
@@ -41,7 +32,6 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/qrcode' element={<ScanQRCode />} />
         </Routes>
-        {/* </div> */}
       </BrowserRouter>
     </>
   );

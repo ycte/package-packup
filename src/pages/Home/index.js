@@ -1,28 +1,10 @@
-import { Card, Tag, Timeline} from "antd"
+import { Card, Tag, Input } from "antd"
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { Collapse, Input } from 'antd';
 import { getToken, http } from "@/utils";
 import './index.scss';
-// import { QrcodeOutlined } from '@ant-design/icons';
 
-const { Panel } = Collapse;
 const Home = () => {
-  const theItems = [
-    {
-      color: 'gray',
-      children: '3-27 17:56 从厦门北站装车'
-    },
-    {
-      color: 'green',
-      // dot: <SmileOutlined />,
-      children: '已到达一期凉亭'
-    }
-  ]
-  // TODO: pkgstate/[:pkgId] 动态路由包裹详情页
-  const getItem = (id) => {
-    return theItems
-  }
   // 状态
   const [data, setdata] = useState([
     {
@@ -59,10 +41,10 @@ const Home = () => {
       // 已完成：useState 触发重新 render，
       // 重新 get my-pkg，导致无限循环
       let res = (await http.get('/pkg/getmy')).data     
-      console.log('my-pkg:', res)
+      console.log('>Home-fetchMypkgs:', res)
       return (res);
     } catch (e) {
-      console.log('get my-pkg info err:', e)
+      console.error('get my-pkg info err:', e)
     }
   }
 
@@ -106,9 +88,8 @@ const Home = () => {
       <div>
         { 
           data.map((value,key) => {
-            // console.log("pktInfo Card");
-            // console.log(value);
-            // console.log(key);
+            // console.log(">Home-Component-pktInfoCard:"
+            // , value, key);
             return (
               <Card className="pktInfo" key={key}>
                 <GetState state={value.state}/>
@@ -118,12 +99,8 @@ const Home = () => {
                 >
                   {value.content}
                 </li> 
-                {/* TODO: 将这两个搬到新页面 */}
-                <Collapse defaultActiveKey={['1']} ghost>
-                  <Panel header="点击查看包裹状态" key={value.id} >
-                    <Timeline items={getItem(value.id)}/>
-                  </Panel>
-                </Collapse> 
+                  <Link to={`/state/${value.pkgId}`}
+                  >点击查看包裹状态</Link> 
               </Card>
             );
           })

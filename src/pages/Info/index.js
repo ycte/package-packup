@@ -14,6 +14,7 @@ const Info = () => {
     userId: '2292020220????',
     username: 'john',
   });
+  
   const getInfo = async () => {
     const token = getToken()
     // console.log(token)
@@ -38,6 +39,10 @@ const Info = () => {
     })
   }, [])
   
+  const refreshInfo = async () => {
+    let res = await getInfo()
+    setInfoMap(res)
+  }
   // TODO: how to expire jwt
   const logout = () => {
     clearToken()
@@ -63,7 +68,7 @@ const Info = () => {
         </Descriptions.Item>
       </Descriptions>
       {/* TODO: 重新渲染 */}
-      {/* <Button onClick={getInfo}>获取信息</Button> */}
+      <Button onClick={refreshInfo}>获取信息</Button>
       <Button onClick={logout}>退出登录</Button>
     </div>
   )

@@ -63,20 +63,23 @@ const BaseLayout = () => {
               行李 pick
             </h1>
           </Link>
-          <Dropdown
-            menu={{
-              items,
-              selectable: true,
-              defaultSelectedKeys: [current],
-            }}
-            className='layout-dropdown'
-          >
-            <Link type="link" onClick={onClick}>
-              <Space>
-                <MenuOutlined />
-              </Space>
-            </Link>
-          </Dropdown>
+          <span className='layout-dropdown-container'>
+            <Dropdown
+              menu={{
+                items,
+                selectable: true,
+                defaultSelectedKeys: [current],
+              }}
+              className='layout-dropdown'
+            >
+              <Link type="link" onClick={onClick}>
+                <Space>
+                  <MenuOutlined
+                    style={{ fontSize: '24px'}} />
+                </Space>
+              </Link>
+            </Dropdown>
+          </span>
         </div>
       </Header>
       <div className='body'>

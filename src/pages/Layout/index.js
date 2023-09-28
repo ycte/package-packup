@@ -18,21 +18,9 @@ const {
 const items = [
   {
     label: (
-      <Link to="/">我的行李</Link>
+      <Link to="/">行李管理</Link>
     ),
     key: 'myPkt',
-  },
-  {
-    label: (
-      <Link to="/pick-up">行李收发</Link>
-    ),
-    key: 'pickUp',
-  },
-  {
-    label: (
-      <Link to="/state-manage">行李登记</Link>
-    ),
-    key: 'stateManage',
   },
   {
     label: (
@@ -51,7 +39,7 @@ const clickFloatBton = () => {
 const BaseLayout = () => {
   const [current, setCurrent] = useState('layout-dropdown');
   const onClick = (e) => {
-    console.log('click ', e);
+    // console.log('>Layout-click:', e);
     setCurrent(e.key);
   };
   return (

@@ -1,6 +1,5 @@
 // TODO: 修改地址信息
 import { Button, Descriptions } from "antd"
-// import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react"
 import { getToken, http, clearToken } from "@/utils"
 
@@ -22,16 +21,15 @@ const Info = () => {
       console.log('no token')
     }
     try {
-      // console.log(token)
       http.interceptors.request.use(config => {
         config.headers.Authorization = `Bearer ${token}`;
         return config;
       })
       let res = (await http.get('/users/me')).data
-      console.log('infoMap:', res)
+      console.log('>Info-getInfo:', res)
       return res
     } catch (e) {
-      console.log('get user info err:', e)
+      console.error('get user info err:', e)
     }
   }
   useEffect(() => {
@@ -64,7 +62,8 @@ const Info = () => {
           {infoMap.address}
         </Descriptions.Item>
       </Descriptions>
-      <Button onClick={getInfo}>获取信息</Button>
+      {/* TODO: 重新渲染 */}
+      {/* <Button onClick={getInfo}>获取信息</Button> */}
       <Button onClick={logout}>退出登录</Button>
     </div>
   )

@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate()
   const { loginStore } = useStore()
   const onFinish = async values => {
-    console.log("Finish:", values);
+    console.log(">Login-Finish:", values);
     try {
       await loginStore.login ({
           username: values.username,
@@ -24,7 +24,7 @@ const Login = () => {
     } 
   } 
   const onFinishFailed = (values) => {
-    console.log("Error:", values)
+    console.error(">Login-Error:", values)
   }
   
   return( 

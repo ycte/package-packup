@@ -18,10 +18,8 @@ const Info = () => {
   const getInfo = async () => {
     const token = getToken()
     // console.log(token)
-    // TODO: 直接接入路由跳转
     if (!token) {
       console.log('no token')
-      // return <Navigate to="/login" replace />
     }
     try {
       // console.log(token)

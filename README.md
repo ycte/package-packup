@@ -8,10 +8,15 @@
 * store: 数据处理
 * utils: 高复用度工具
 
-
 ## TODO:
-- [] 😑 token 过期处理
-- [] 登陆后的 data 问题
+
+- [ ] 😑 token 过期检查
+- [x] 登陆后的 data 问题
+- [ ] 扫码后的验证（一个异步动画）
+
+## TODO: navigate 的兼容性问题原因(login.js:22)
+？？？
+
 ## exec
 
 ```bash

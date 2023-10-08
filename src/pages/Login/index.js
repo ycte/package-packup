@@ -2,14 +2,14 @@ import {Button, Card, Form, Input, Checkbox, message, FloatButton} from 'antd'
 import 'antd/dist/reset.css';
 import './index.scss'
 import { useStore } from '@/store';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const clickFloatBton = () => {
   window.location.href='/'
 }
 
 const Login = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { loginStore } = useStore()
   const onFinish = async values => {
     console.log(">Login-Finish:", values);
@@ -19,7 +19,9 @@ const Login = () => {
           password: values.password
       }).then((res) => {
         console.log('login:', res)
-        navigate('/')
+        // TODO:
+        // navigate('/')
+        window.location.href='/'
       })
       
     } catch (e) {

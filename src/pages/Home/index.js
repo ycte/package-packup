@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { getToken, http } from "@/utils";
 import './index.scss';
-// import { useActionData } from "react-router-dom";
 
 const Home = () => {
 
@@ -18,16 +17,13 @@ const Home = () => {
     try {
       // console.log(token)
       http.interceptors.request.use(config => {
-        // console.log('>Home-fetchMypkgs:',
-        //   config.headers.Authorization)
         config.headers.Authorization = `Bearer ${token}`;
-        // console.log('>Home-fetchMypkgs:',
-        //   config.headers.Authorization)
         return config;
       })
       // 已完成：useState 触发重新 render，
       // 重新 get my-pkg，导致无限循环
-      let res = (await http.get('/pkg/getmy')).data
+      let res = (await http.get('/pkg/getmy'))
+
       console.log('>Home-fetchMypkgs:', res)
       return (res);
     } catch (e) {
@@ -44,12 +40,9 @@ const Home = () => {
   // 确认完弹一个 modal, modal 里面放[返回首页]、[继续扫码]
   useEffect(() => {
     fetchMyPkgs()
-
       .then(res => {
-        setdata(res)
-      })
-      .catch(err => {
-        console.log('err:', err)
+        if (res.status === 200)
+          setdata(res.data)
       })
   }, [])
 

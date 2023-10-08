@@ -13,6 +13,7 @@
 - [ ] 😑 token 过期检查
 - [x] 登陆后的 data 问题
 - [ ] 扫码后的验证（一个异步动画）
+- [ ] onClick and so on process
 
 ## TODO: navigate 的兼容性问题原因(login.js:22)
 ？？？

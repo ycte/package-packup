@@ -15,9 +15,10 @@ class LoginStore {
       password
     })
     
-    console.log(res.data)
+    // console.log(res.data)
     this.token = res.data.access_token
-    setToken(res.data.access_token)
+    await setToken(res.data.access_token)
+    return getToken()
   }
 }
 export default LoginStore

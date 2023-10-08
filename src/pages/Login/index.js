@@ -2,14 +2,14 @@ import {Button, Card, Form, Input, Checkbox, message, FloatButton} from 'antd'
 import 'antd/dist/reset.css';
 import './index.scss'
 import { useStore } from '@/store';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const clickFloatBton = () => {
   window.location.href='/'
 }
 
 const Login = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { loginStore } = useStore()
   const onFinish = async values => {
     console.log(">Login-Finish:", values);
@@ -17,8 +17,13 @@ const Login = () => {
       await loginStore.login ({
           username: values.username,
           password: values.password
+      }).then((res) => {
+        console.log('login:', res)
+        // TODO:
+        // navigate('/')
+        window.location.href='/'
       })
-      navigate('/')
+      
     } catch (e) {
       message.error("登录失败")
     } 
@@ -51,7 +56,7 @@ const Login = () => {
             name="password"
             rules={[
               { required: true, message: '密码不能为空!', },
-              { min:6, max: 16, message:'密码长度在6-16位之间', 
+              { min:5, max: 16, message:'密码长度在6-16位之间', 
                 validateTrigger: 'onChange'},
             ]}
           >

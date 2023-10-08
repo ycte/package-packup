@@ -12,6 +12,7 @@ import Info from './pages/Info';
 import ScanQRCode from './pages/QRCode';
 import StateView from './pages/State';
 
+
 function App() {
   return (
     <>
@@ -23,7 +24,9 @@ function App() {
             </AuthRoute>
           }>
             {/* 二级路由 */}
-            <Route index element={<Home />} />
+            <Route index
+              element={<Home />}
+              />
             <Route path='/state/:pkgid' element={<StateView />} />
             <Route path='/pick-up' element={<PickUp />} />
             <Route path='/state-manage' element={<StateManage />} />

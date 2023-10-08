@@ -3,30 +3,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { getToken, http } from "@/utils";
 import './index.scss';
+// import { useActionData } from "react-router-dom";
 
 const Home = () => {
-  // 状态
-  const [data, setdata] = useState([
-    {
-      pkgId: 1,
-      userId: '229202276301',
-      state: '已签收',
-      content: '10-2777-1',
-    },
-    {
-      pkgId:2,
-      userId: '229202276302',
-      state: '运输中',
-      content: '10-2777-2',
-    },
-    {
-      pkgId:3,
-      userId: '229202276302',
-      state: '未开始',
-      content: '10-2777-3',
-    }
-  ])
+
+  // TODO:
   const fetchMyPkgs = async () => {
+    console.log('>fetchMyPkgs start')
     const token = getToken()
     // console.log(token)
     if (!token) {
@@ -35,12 +18,16 @@ const Home = () => {
     try {
       // console.log(token)
       http.interceptors.request.use(config => {
+        // console.log('>Home-fetchMypkgs:',
+        //   config.headers.Authorization)
         config.headers.Authorization = `Bearer ${token}`;
+        // console.log('>Home-fetchMypkgs:',
+        //   config.headers.Authorization)
         return config;
       })
       // 已完成：useState 触发重新 render，
       // 重新 get my-pkg，导致无限循环
-      let res = (await http.get('/pkg/getmy')).data     
+      let res = (await http.get('/pkg/getmy')).data
       console.log('>Home-fetchMypkgs:', res)
       return (res);
     } catch (e) {
@@ -48,31 +35,38 @@ const Home = () => {
     }
   }
 
+  // 状态
+  const [data, setdata] = useState([])
   // TODO: 是否缓存,
   // 仅在后面的 [] 改变时（即页面重新导入）才调用，
   // TODO: 每次扫码后得刷新页面，扫码做单独页面[camera]、[手动输入]
   // 扫码完弹一个 modal, 一个 input 一个确认 一个取消
   // 确认完弹一个 modal, modal 里面放[返回首页]、[继续扫码]
   useEffect(() => {
-    fetchMyPkgs().then(res => {
-      setdata(res)
-    })
+    fetchMyPkgs()
+
+      .then(res => {
+        setdata(res)
+      })
+      .catch(err => {
+        console.log('err:', err)
+      })
   }, [])
 
   // 组件：返回有颜色的包裹状态
   const GetState = (props) => {
-    let color = props.state === '已签收' ? 'green':'geekblue';
-        if (props.state === '未开始') {
-              color = 'volcano';
-        }
-        return (
-          <Tag color={color}>
-            <Link to={'home'}>{props.state}</Link>
-          </Tag>
-        );
+    let color = props.state === '已签收' ? 'green' : 'geekblue';
+    if (props.state === '未开始') {
+      color = 'volcano';
+    }
+    return (
+      <Tag color={color}>
+        <Link to={'home'}>{props.state}</Link>
+      </Tag>
+    );
   }
 
-  return ( 
+  return (
     <div>
       <div className="QRIcon">
         {/* qrcode svg */}
@@ -86,21 +80,21 @@ const Home = () => {
         我的行李
       </Card>
       <div>
-        { 
-          data.map((value,key) => {
+        {
+          data.map((value, key) => {
             // console.log(">Home-Component-pktInfoCard:"
             // , value, key);
             return (
               <Card className="pktInfo" key={key}>
-                <GetState state={value.state}/>
+                <GetState state={value.state} />
                 <li
                   key={key} style=
                   {{ fontSize: "x-large", fontWeight: 777 }}
                 >
                   {value.content}
-                </li> 
-                  <Link to={`/state/${value.pkgId}`}
-                  >点击查看包裹状态</Link> 
+                </li>
+                <Link to={`/state/${value.pkgId}`}
+                >点击查看包裹状态</Link>
               </Card>
             );
           })

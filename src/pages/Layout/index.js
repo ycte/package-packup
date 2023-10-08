@@ -11,6 +11,7 @@ import {
 import './index.scss'
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { clearToken } from '@/utils'
 
 const {
   Header,
@@ -33,6 +34,7 @@ const items = [
   // }
 ]
 const clickFloatBton = () => {
+  clearToken()
   window.location.href = '/login'
 }
 

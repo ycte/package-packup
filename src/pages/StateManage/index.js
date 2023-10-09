@@ -1,5 +1,6 @@
 import { Ahttp } from '@/utils';
 import { Input, Card, Button, Select, Form } from 'antd';
+import { Todo } from '@/components/Todo';
 const StateManage = () => {
   const onFinish = async (values) => {
     console.log('Success:', values);
@@ -18,7 +19,7 @@ const StateManage = () => {
     <div>
       在这里工作人员改变行李状态,一个表单,设置状态,手动输入和扫码
       <br />
-      TODO: 提交成功弹出一个 modal, 再次扫码和返回首页
+      <Todo>提交成功弹出一个 modal, 再次扫码和返回首页</Todo>
       <Card>
 
         <Form

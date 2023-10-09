@@ -1,12 +1,14 @@
-import {Button, Card, Form, Input, Checkbox, message, FloatButton} from 'antd'
+import {
+  Button, Card, Form, Input, Checkbox, message
+} from 'antd'
 import 'antd/dist/reset.css';
 import './index.scss'
 import { useStore } from '@/store';
 // import { useNavigate } from 'react-router-dom';
 
-const clickFloatBton = () => {
-  window.location.href='/'
-}
+// const clickFloatBton = () => {
+//   window.location.href='/'
+// }
 
 const Login = () => {
   // const navigate = useNavigate()
@@ -14,34 +16,34 @@ const Login = () => {
   const onFinish = async values => {
     console.log(">Login-Finish:", values);
     try {
-      await loginStore.login ({
-          username: values.username,
-          password: values.password
+      await loginStore.login({
+        username: values.username,
+        password: values.password
       }).then((res) => {
         console.log('login:', res)
         // TODO:
         // navigate('/')
-        window.location.href='/'
+        window.location.href = '/'
       })
-      
+
     } catch (e) {
       message.error("登录失败")
-    } 
-  } 
+    }
+  }
   const onFinishFailed = (values) => {
     console.error(">Login-Error:", values)
   }
-  
-  return( 
+
+  return (
     <div className='login'>
       <Card className='login-container'>
-        <div className='login-title'>快来寄行李！</div>
-        <Form 
+        <div className='login-title'></div>
+        <Form
           validateTrigger={['onBlur', 'onChange']}
-          onFinish = {onFinish}
-          onFinishFailed = {onFinishFailed}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
-          <Form.Item 
+          <Form.Item
             label="账号："
             name="username"
             rules={[
@@ -51,13 +53,15 @@ const Login = () => {
           >
             <Input size="large" placeholder="请输入帐号" />
           </Form.Item>
-          <Form.Item 
+          <Form.Item
             label="密码："
             name="password"
             rules={[
               { required: true, message: '密码不能为空!', },
-              { min:5, max: 16, message:'密码长度在6-16位之间', 
-                validateTrigger: 'onChange'},
+              {
+                min: 5, max: 16, message: '密码长度在6-16位之间',
+                validateTrigger: 'onChange'
+              },
             ]}
           >
             <Input.Password size="large" placeholder="请输入密码" />
@@ -75,9 +79,9 @@ const Login = () => {
         </Form>
         {/* <Button type='primary'>Login</Button> */}
       </Card>
-      <div>
+      {/* <div>
         <FloatButton onClick={clickFloatBton} />
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -13,7 +13,7 @@
 - [ ] 😑 token 过期检查
 - [x] 登陆后的 data 问题
 - [ ] 扫码后的验证（一个异步动画）
-- [ ] onClick and so on process
+- [x] onClick and so on process
 
 ## TODO: navigate 的兼容性问题原因(login.js:22)
 ？？？
@@ -36,6 +36,29 @@ pnpm install
 pnpm start
 ```
 
+* react 事件绑定写法上的一些小 tips
+  1. react 的 jsx 文件使得可以在 template 中用 {} 包裹 js 代码
+  2. 而在渲染时，js 代码会被执行，例如下面的 onClick 事件
+
+   ```js
+   const onClick = () => {}
+   ...
+   <div onClick={() => onClick()}>click me</div>
+   # 上面的代码会转换成
+   <div onClick={(onClick 函数的定义)}>click me</div>
+   # 即 {} 中的箭头函数在渲染时直接被替换成返回值 onClick 函数的定义
+   ```
+
+  3. 上面的例子没有影响，而在下面的例子中，onClick 发生异常
+
+   ```js
+   const onClick = () => {}
+   <div onClick={onClick()}>click me</div>
+   # 会发现渲染时 onClick 事件被立即触发
+   # 即 onClick 函数被立即执行
+   ```
+
+  4. 只需将事件处理函数的变量名绑定即可，无需立即执行
 * useState 无限循环
 
   ```js

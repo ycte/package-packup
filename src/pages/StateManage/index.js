@@ -17,15 +17,21 @@ const StateManage = () => {
   return (
     <div>
       在这里工作人员改变行李状态,一个表单,设置状态,手动输入和扫码
+      <br />
+      TODO: 提交成功弹出一个 modal, 再次扫码和返回首页
       <Card>
 
         <Form
           validateTrigger={['onBlur', 'onChange']}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          initialValues={{
+            pkgId: '22920202208888-4',
+            state: 'goon',
+          }}
         >
           <Form.Item
-            label="pkgId："
+            label="pkgId：(后面会先进一个扫码界面，二维码信息就是这个)"
             name="pkgId"
             rules={[
               { required: true, message: 'pkgid 不能为空!', },
@@ -34,17 +40,17 @@ const StateManage = () => {
           >
             <Input size="large"
               placeholder="请输入pkgId"
-              defaultValue={'22920202208888-4'} />
+              />
           </Form.Item>
           <Form.Item
-            label="state："
+            label="state：(等 role 做好了，可以去掉这个，staff 的地址就是 reason)"
             name="state"
             rules={[
               { required: true, message: 'state 不能为空!', },
             ]}
           >
             <Select
-              defaultValue="运输中"
+              
               style={{
                 width: 90,
               }}

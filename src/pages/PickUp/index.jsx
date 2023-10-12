@@ -28,14 +28,14 @@ const PickUp = () => {
           onClick={() => add()}>
           添加一个默认包裹
         </Button>
-        <div>
+        {/* <div>
           <h3>默认包裹信息</h3>
           <p>pkgId: 'userId-'+'n'</p>
           <p>content: 'hhh'</p>
           <p>state: 'init'</p>
 
 
-        </div>
+        </div> */}
 
       </Card>
 

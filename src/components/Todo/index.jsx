@@ -1,4 +1,5 @@
 import './index.scss'
+// eslint-disable-next-line react/prop-types
 const Todo = ({children}) => {
   return (
     <div>

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
 import { Card, Tag, Input } from "antd"
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';

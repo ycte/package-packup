@@ -8,6 +8,7 @@ import { Navigate } from 'react-router-dom'
 // import { Modal } from "antd"
 // import { useState } from "react";
 
+// eslint-disable-next-line react/prop-types
 function AuthRoute ({ children }) {
   // const [isModalOpen, setIsModalOpen] = useState(true);
   // const handleOk = () => {

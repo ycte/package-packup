@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 // import '../index.less';
 import jsQR from 'jsqr';
 

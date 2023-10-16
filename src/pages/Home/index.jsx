@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import { Card, Tag, Input } from "antd"
+import { Card, Tag, Input} from "antd"
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { getToken, http } from "@/utils";
+import { clearToken, getToken, http } from "@/utils";
 import './index.scss';
 
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
       return (res);
     } catch (e) {
       console.error('get my-pkg info err:', e)
-      window.location.href = '/login'
+      clearToken()
     }
   }
 
@@ -63,6 +63,7 @@ const Home = () => {
   }
 
   return (
+
     <div>
       <div className="QRIcon">
         {/* qrcode svg */}

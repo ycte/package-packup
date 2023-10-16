@@ -9,7 +9,8 @@ const clickButton = (url) => {
   window.location.href = url
 }
 
-const FloatButtonDiv = ({ icon, url, title }) => {
+// eslint-disable-next-line react/prop-types
+function FloatButtonDiv({ icon, url, title }) {
   const [popOpen, setPopOpen] = useState(true)
   return (
     <Popover

@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve:test": "serve -s build",
+    "vite:b": "vite build",
+    "vite:c": "vite build --watch",
+    "vite:p": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +57,9 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "sass": "^1.60.0",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3"
   }
 }

@@ -10,7 +10,7 @@ import {
 import './index.scss'
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { clearToken } from '@/utils'
+// import { clearToken } from '@/utils'
 import FloatButtonDiv from '@/components/FloatButton'
 
 const {
@@ -34,13 +34,13 @@ const items = [
 
   // }
 ]
-const logout = () => {
-  clearToken()
-  window.location.href = '/login'
-}
-const scanQRcode = () => {
-  window.location.href = './pick-up'
-}
+// const logout = () => {
+//   clearToken()
+//   window.location.href = '/login'
+// }
+// const scanQRcode = () => {
+//   window.location.href = './pick-up'
+// }
 
 const BaseLayout = () => {
   const [current, setCurrent] = useState('layout-dropdown');

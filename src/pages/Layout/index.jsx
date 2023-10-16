@@ -1,21 +1,22 @@
 import {
   Layout,
-  FloatButton,
   Dropdown,
   Space,
 } from 'antd'
 import {
   MenuOutlined,
-  ArrowRightOutlined,
+  QrcodeOutlined,
 } from '@ant-design/icons'
 import './index.scss'
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { clearToken } from '@/utils'
+import FloatButtonDiv from '@/components/FloatButton'
 
 const {
   Header,
 } = Layout
+
 const items = [
   {
     label: (
@@ -33,9 +34,12 @@ const items = [
 
   // }
 ]
-const clickFloatBton = () => {
+const logout = () => {
   clearToken()
   window.location.href = '/login'
+}
+const scanQRcode = () => {
+  window.location.href = './pick-up'
 }
 
 const BaseLayout = () => {
@@ -65,7 +69,7 @@ const BaseLayout = () => {
               <Link type="link" onClick={onClick}>
                 <Space>
                   <MenuOutlined
-                    style={{ fontSize: '24px'}} />
+                    style={{ fontSize: '24px' }} />
                 </Space>
               </Link>
             </Dropdown>
@@ -77,8 +81,9 @@ const BaseLayout = () => {
           <Outlet />
         </Layout>
         <div>
-          <FloatButton onClick={clickFloatBton} type="primary"
-            icon={<ArrowRightOutlined />} />
+          <FloatButtonDiv
+            icon={<QrcodeOutlined />} click={scanQRcode} title='scan Qrcode'
+          />
         </div>
       </div>
     </Layout>

@@ -82,7 +82,7 @@ const BaseLayout = () => {
         </Layout>
         <div>
           <FloatButtonDiv
-            icon={<QrcodeOutlined />} click={scanQRcode} title='scan Qrcode'
+            icon={<QrcodeOutlined />} url='./pick-up' title='scan Qrcode'
           />
         </div>
       </div>

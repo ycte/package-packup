@@ -30,6 +30,7 @@ const Home = () => {
       return (res);
     } catch (e) {
       console.error('get my-pkg info err:', e)
+      window.location.href = '/login'
     }
   }
 

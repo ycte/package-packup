@@ -31,6 +31,7 @@ const Info = () => {
       return res
     } catch (e) {
       console.error('get user info err:', e)
+      clearToken()
     }
   }
   useEffect(() => {
